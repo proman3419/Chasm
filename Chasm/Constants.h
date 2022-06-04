@@ -1,0 +1,6 @@
+#pragma once
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 768
+
+#define MINER_FRAMES_CNT 10
+#define MINER_BACKGROUNDS_CNT 5
