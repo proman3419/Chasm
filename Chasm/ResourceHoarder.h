@@ -6,6 +6,8 @@ class ResourceHoarder
 public:
 	ResourceHoarder();
 
+	sf::Texture& buttonBackgroundTexture();
+	sf::Sprite& minerSprite();
 	sf::Sprite& minerSprite(size_t id);
 	sf::Sprite& minerBackgroundSprite(size_t id);
 	sf::Sprite& shopBackgroundSprite();
@@ -18,8 +20,10 @@ private:
 	sf::Texture minerTextures_[MINER_FRAMES_CNT];
 	sf::Texture minerBackgroundTextures_[MINER_BACKGROUNDS_CNT];
 	sf::Texture shopBackgroundTexture_;
+	sf::Texture buttonBackgroundTexture_;
 
 	// Sprites
+	sf::Sprite minerSprite_;
 	sf::Sprite minerSprites_[MINER_FRAMES_CNT];
 	sf::Sprite minerBackgroundSprites_[MINER_BACKGROUNDS_CNT];
 	sf::Sprite shopBackgroundSprite_;

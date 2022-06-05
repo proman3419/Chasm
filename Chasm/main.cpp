@@ -30,7 +30,7 @@ int main()
         // left side
         gui.showMinerBackground(gs.getDepthLayer());
         gui.showMiner(frameId);
-        if (gui.checkIfClicked(gui.minerSprite()))
+        if (gui.checkIfClicked(gui.rh().minerSprite()))
             gs.minerClicked();
         gui.showText("Depth:" + std::to_string(gs.depth()), TITLE_FONT_SIZE, sf::Color::Yellow,
             sf::Text::Bold, WINDOW_WIDTH / 64, WINDOW_HEIGHT / 64);
@@ -39,6 +39,9 @@ int main()
         gui.showShopBackground();
         gui.showText("Rocks:" + std::to_string(gs.rocks()), TITLE_FONT_SIZE, sf::Color::Yellow,
             sf::Text::Bold, WINDOW_WIDTH / 2 + WINDOW_WIDTH / 64, WINDOW_HEIGHT / 64);
+        gui.showBuyDigSpeedButton();
+        if (gui.checkIfClicked(gui.buyDigSpeedButton()))
+            gs.buyDigSpeed();
 
         window.display();
         if (frameId != 0 && frameId % (2 * MINER_FRAMES_CNT) == 0)

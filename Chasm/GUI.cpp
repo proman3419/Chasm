@@ -27,7 +27,20 @@ void GUI::showMiner(unsigned long long frameId)
 	sf::Sprite sprite = rh_.minerSprite(minerFrameId);
 	sprite.setPosition(WINDOW_WIDTH / 8, WINDOW_WIDTH / 8);
 	windowPtr_->draw(sprite);
-    minerSprite_ = sprite;
+}
+
+void GUI::showBuyDigSpeedButton()
+{
+    sf::Sprite sprite;
+    sprite.setTexture(rh_.buttonBackgroundTexture());
+    float x = WINDOW_WIDTH / 2 + WINDOW_WIDTH / 64;
+    float y = WINDOW_HEIGHT / 8 + WINDOW_HEIGHT / 64;
+    sprite.setTextureRect(sf::IntRect(0, 0, WINDOW_WIDTH / 2 - WINDOW_WIDTH / 32, WINDOW_HEIGHT / 10));
+    sprite.setPosition(x, y);
+
+    windowPtr_->draw(sprite);
+    showText("DIG SPEED ++", BUTTON_FONT_SIZE, sf::Color::Black, 0, x + WINDOW_WIDTH / 64, y + WINDOW_HEIGHT / 64);
+    buyDigSpeedButton_ = sprite;
 }
 
 bool GUI::checkIfClicked(sf::Sprite sprite)
@@ -76,7 +89,12 @@ void GUI::showText(std::string toShow, unsigned int fontSize, sf::Color color, s
     windowPtr_->draw(text);
 }
 
-sf::Sprite& GUI::minerSprite()
+ResourceHoarder& GUI::rh()
 {
-    return minerSprite_;
+    return rh_;
+}
+
+sf::Sprite& GUI::buyDigSpeedButton()
+{
+    return buyDigSpeedButton_;
 }
