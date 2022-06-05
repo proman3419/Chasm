@@ -1,12 +1,8 @@
 #include "Constants.h"
 #include "ResourceHoarder.h"
-#include <iostream>
 
 ResourceHoarder::ResourceHoarder()
 {
-	
-	;
-
 	for (int i = 0; i < MINER_FRAMES_CNT; ++i)
 	{
 		std::string path = "img/miner/miner_" + std::to_string(i) + ".png";
@@ -48,6 +44,8 @@ ResourceHoarder::ResourceHoarder()
 	sprite.setTexture(shopBackgroundTexture_);
 	sprite.setTextureRect(sf::IntRect(0, 0, WINDOW_WIDTH / 2, WINDOW_HEIGHT));
 	shopBackgroundSprite_ = sprite;
+
+	mainFont_.loadFromFile("fonts/bescii.ttf");
 }
 
 sf::Sprite& ResourceHoarder::minerSprite(size_t id)
@@ -63,4 +61,9 @@ sf::Sprite& ResourceHoarder::minerBackgroundSprite(size_t id)
 sf::Sprite& ResourceHoarder::shopBackgroundSprite()
 {
 	return shopBackgroundSprite_;
+}
+
+sf::Font& ResourceHoarder::mainFont()
+{
+	return mainFont_;
 }
