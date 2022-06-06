@@ -47,6 +47,25 @@ void GameState::buyDigClickMultiplier()
 		digClickMultiplier_, digClickMultiplierNextLevelValue());
 }
 
+void GameState::buyDynamitePower()
+{
+	buyIfPossible(dynamitePowerNextLevelCost(), dynamitePowerLevel_,
+		dynamitePower_, dynamitePowerNextLevelValue());
+}
+
+bool GameState::buyDynamite()
+{
+	auto cost = dynamiteCost();
+	if (cost <= rocks_)
+	{
+		rocks_ -= cost;
+		++dynamitesBought_;
+		depth_ += dynamitePower_;
+		return true;
+	}
+	return false;
+}
+
 size_t GameState::getDepthLayer()
 {
 	return std::min(std::max(0, logFunc(DEPTH_LAYER_BASE, depth_)), MINER_BACKGROUNDS_CNT-1);

@@ -3,8 +3,6 @@
 
 ResourceHoarder::ResourceHoarder()
 {
-	sf::Texture texture;
-
 	for (int i = 0; i < MINER_FRAMES_CNT; ++i)
 	{
 		std::string path = "img/miner/miner_" + std::to_string(i) + ".png";
@@ -37,6 +35,23 @@ ResourceHoarder::ResourceHoarder()
 		minerBackgroundSprites_[i] = sprite;
 	}
 
+	for (int i = 0; i < EXPLOSION_FRAMES_CNT; ++i)
+	{
+		std::string path = "img/explosion/tile" + std::to_string(i) + ".png";
+
+		sf::Texture texture;
+		texture.loadFromFile(path);
+		texture.setRepeated(false);
+		explosionTextures_[i] = texture;
+
+		sf::Sprite sprite;
+		sprite.setTexture(explosionTextures_[i]);
+		const float scale = 4;
+		sprite.setScale(scale, scale);
+		explosionSprites_[i] = sprite;
+	}
+
+	sf::Texture texture;
 	texture.loadFromFile("img/shop_background.png");
 	texture.setRepeated(true);
 	shopBackgroundTexture_ = texture;

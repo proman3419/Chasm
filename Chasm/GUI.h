@@ -13,17 +13,25 @@ public:
 		float x, float y);
 	void showButton(std::string label, float x, float y, float xLabelOff, float yLabelOff, 
 		float width, float height, sf::Sprite& spriteHolder);
+	void showExplosion();
+	void setExplosionShowing() { explosionShowing_ = true; }
 
 	sf::Sprite& minerSprite() { return minerSprite_; }
 	sf::Sprite& buyDigSpeedButton() { return buyDigSpeedButton_; }
-	sf::Sprite& buyDigClickMultiplierButton() { return buyDigClickMultiplier_; }
+	sf::Sprite& buyDigClickMultiplierButton() { return buyDigClickMultiplierButton_; }
+	sf::Sprite& buyDynamitePowerButton() { return buyDynamitePowerButton_; }
+	sf::Sprite& buyDynamiteButton() { return buyDynamiteButton_; }
 
 private:
 	sf::RenderWindow* windowPtr_;
 	ResourceHoarder rh_;
 	sf::Sprite minerSprite_;
 	sf::Sprite buyDigSpeedButton_;
-	sf::Sprite buyDigClickMultiplier_;
-	sf::Clock clock;
+	sf::Sprite buyDigClickMultiplierButton_;
+	sf::Sprite buyDynamitePowerButton_;
+	sf::Sprite buyDynamiteButton_;
+	sf::Clock clock_;
+	size_t explosionFrame_ = 0;
+	bool explosionShowing_ = false;
 };
 

@@ -26,14 +26,14 @@ void GUI::showMiner(unsigned long long frameId)
 		frameId % MINER_FRAMES_CNT :
 		MINER_FRAMES_CNT - (frameId % MINER_FRAMES_CNT) - 1;
 	sf::Sprite sprite = rh_.minerSprite(minerFrameId);
-	sprite.setPosition(WINDOW_WIDTH / 8, WINDOW_WIDTH / 8);
+	sprite.setPosition(WINDOW_WIDTH / 10, WINDOW_HEIGHT / 6);
 	windowPtr_->draw(sprite);
     minerSprite_ = sprite;
 }
 
 bool GUI::checkIfClicked(sf::Sprite& sprite)
 {
-    if (clock.getElapsedTime().asMilliseconds() >= GUI_BREAK_TIME)
+    if (clock_.getElapsedTime().asMilliseconds() >= GUI_BREAK_TIME)
     {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
@@ -76,4 +76,19 @@ void GUI::showButton(std::string label, float x, float y, float xLabelOff, float
     windowPtr_->draw(sprite);
     showText(label, BUTTON_FONT_SIZE, sf::Color::Black, 0, x + xLabelOff, y + xLabelOff);
     spriteHolder = sprite;
+}
+
+void GUI::showExplosion()
+{
+    if (explosionShowing_)
+    {
+        sf::Sprite sprite = rh_.explosionSprite(explosionFrame_++);
+        sprite.setPosition(WINDOW_WIDTH / 8, 3 * WINDOW_HEIGHT / 6);
+        windowPtr_->draw(sprite);
+        if (explosionFrame_ >= EXPLOSION_FRAMES_CNT)
+        {
+            explosionShowing_ = false;
+            explosionFrame_ = 0;
+        }
+    }
 }
