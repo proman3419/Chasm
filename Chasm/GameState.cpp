@@ -37,34 +37,17 @@ void GameState::buyIfPossible(unsigned int cost, unsigned int& level, unsigned i
 
 void GameState::buyDigSpeed()
 {
-	unsigned int cost = exponentFunc(DIG_SPEED_COST_BASE, DIG_SPEED_COST_EXPONENT, digSpeedLevel_);
-	unsigned int newVal = digSpeed_ + DIG_SPEED_INCREMENT_VAL;
-	buyIfPossible(cost, digSpeedLevel_, digSpeed_, newVal);
+	buyIfPossible(digSpeedNextLevelCost(), digSpeedLevel_, 
+		digSpeed_, digSpeedNextLevelValue());
 }
 
 void GameState::buyDigClickMultiplier()
 {
-	unsigned int cost = exponentFunc(DIG_SPEED_COST_BASE, DIG_SPEED_COST_EXPONENT, digSpeedLevel_);
-	unsigned int newVal = digClickMultiplier_ * DIG_CLICK_MULTIPLIER_VAL;
-	buyIfPossible(cost, digClickMultiplier_, digClickMultiplier_, newVal);
+	buyIfPossible(digClickMultiplierNextLevelCost(), digClickMultiplierLevel_, 
+		digClickMultiplier_, digClickMultiplierNextLevelValue());
 }
 
 size_t GameState::getDepthLayer()
 {
 	return std::min(std::max(0, logFunc(DEPTH_LAYER_BASE, depth_)), MINER_BACKGROUNDS_CNT-1);
-}
-
-unsigned int GameState::digSpeed()
-{
-	return digSpeed_;
-}
-
-unsigned long long GameState::depth()
-{
-	return depth_;
-}
-
-unsigned long long GameState::rocks()
-{
-	return rocks_;
 }

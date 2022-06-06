@@ -5,6 +5,7 @@
 #define BUTTON_FONT_SIZE 24
 #define ADDITIONAL_FRAMERATE 3
 #define MAX_FRAMERATE 120
+#define GUI_BREAK_TIME 50 // milliseconds
 
 #define MINER_FRAMES_CNT 10
 #define MINER_BACKGROUNDS_CNT 5

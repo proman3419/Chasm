@@ -10,9 +10,17 @@ public:
 	void minerClicked();
 	size_t getDepthLayer();
 
-	unsigned int digSpeed();
-	unsigned long long depth();
-	unsigned long long rocks();
+	unsigned int digSpeedNextLevelValue() { return digSpeed_ + DIG_SPEED_INCREMENT_VAL; }
+	unsigned int digSpeedNextLevelCost() { return exponentFunc(DIG_SPEED_COST_BASE, DIG_SPEED_COST_EXPONENT, digSpeedLevel_); }
+	unsigned int digClickMultiplierNextLevelValue() { return digClickMultiplier_ * DIG_CLICK_MULTIPLIER_VAL; }
+	unsigned int digClickMultiplierNextLevelCost() { return exponentFunc(DIG_SPEED_COST_BASE, DIG_SPEED_COST_EXPONENT, digClickMultiplierLevel_); }
+
+	unsigned int digSpeed() { return digSpeed_; }
+	unsigned int digSpeedLevel() { return digSpeedLevel_; }
+	unsigned int digClickMultiplier() { return digClickMultiplier_; }
+	unsigned int digClickMultiplierLevel() { return digClickMultiplierLevel_; }
+	unsigned long long depth() { return depth_; }
+	unsigned long long rocks() { return rocks_; }
 
 private:
 	double exponentFunc(double base, double exponent, unsigned int level);

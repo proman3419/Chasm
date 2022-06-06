@@ -30,18 +30,38 @@ int main()
         // left side
         gui.showMinerBackground(gs.getDepthLayer());
         gui.showMiner(frameId);
-        if (gui.checkIfClicked(gui.rh().minerSprite()))
+        if (gui.checkIfClicked(gui.minerSprite()))
             gs.minerClicked();
-        gui.showText("Depth:" + std::to_string(gs.depth()), TITLE_FONT_SIZE, sf::Color::Yellow,
+        gui.showText("Depth:" + std::to_string(gs.depth()) + "\nLayer:" + std::to_string(gs.getDepthLayer()),
+            TITLE_FONT_SIZE, sf::Color::Yellow,
             sf::Text::Bold, WINDOW_WIDTH / 64, WINDOW_HEIGHT / 64);
 
         // right side
         gui.showShopBackground();
         gui.showText("Rocks:" + std::to_string(gs.rocks()), TITLE_FONT_SIZE, sf::Color::Yellow,
             sf::Text::Bold, WINDOW_WIDTH / 2 + WINDOW_WIDTH / 64, WINDOW_HEIGHT / 64);
-        gui.showBuyDigSpeedButton();
+
+        std::string buyDigSpeedButtonLabel = "DIG SPEED\nlevel: " + std::to_string(gs.digSpeedLevel()) +
+            "\nvalue: " + std::to_string(gs.digSpeed()) + "\nnext value: " + 
+            std::to_string(gs.digSpeedNextLevelValue()) + "\ncost: " + 
+            std::to_string(gs.digSpeedNextLevelCost());
+        gui.showButton(buyDigSpeedButtonLabel,
+            WINDOW_WIDTH / 2 + WINDOW_WIDTH / 64, WINDOW_HEIGHT / 10 + WINDOW_HEIGHT / 64,
+            WINDOW_WIDTH / 64, WINDOW_HEIGHT / 64,
+            WINDOW_WIDTH / 2 - WINDOW_WIDTH / 32, WINDOW_HEIGHT / 5, gui.buyDigSpeedButton());
         if (gui.checkIfClicked(gui.buyDigSpeedButton()))
             gs.buyDigSpeed();
+
+        std::string buyDigClickMultiplierButtonLabel = "CLICK MULTIPLIER\nlevel: " + std::to_string(gs.digClickMultiplierLevel()) +
+            "\nvalue: " + std::to_string(gs.digClickMultiplier()) + "\nnext value: " +
+            std::to_string(gs.digClickMultiplierNextLevelValue()) + "\ncost: " +
+            std::to_string(gs.digClickMultiplierNextLevelCost());
+        gui.showButton(buyDigClickMultiplierButtonLabel,
+            WINDOW_WIDTH / 2 + WINDOW_WIDTH / 64, (WINDOW_HEIGHT / 10 + 2*WINDOW_HEIGHT / 64) + WINDOW_HEIGHT / 5,
+            WINDOW_WIDTH / 64, WINDOW_HEIGHT / 64,
+            WINDOW_WIDTH / 2 - WINDOW_WIDTH / 32, WINDOW_HEIGHT / 5, gui.buyDigClickMultiplierButton());
+        if (gui.checkIfClicked(gui.buyDigClickMultiplierButton()))
+            gs.buyDigClickMultiplier();
 
         window.display();
         if (frameId != 0 && frameId % (2 * MINER_FRAMES_CNT) == 0)

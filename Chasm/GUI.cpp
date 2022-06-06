@@ -1,4 +1,5 @@
 #include "GUI.h"
+#include <iostream>
 
 GUI::GUI(sf::RenderWindow* window)
 {
@@ -27,41 +28,18 @@ void GUI::showMiner(unsigned long long frameId)
 	sf::Sprite sprite = rh_.minerSprite(minerFrameId);
 	sprite.setPosition(WINDOW_WIDTH / 8, WINDOW_WIDTH / 8);
 	windowPtr_->draw(sprite);
+    minerSprite_ = sprite;
 }
 
-void GUI::showBuyDigSpeedButton()
+bool GUI::checkIfClicked(sf::Sprite& sprite)
 {
-    sf::Sprite sprite;
-    sprite.setTexture(rh_.buttonBackgroundTexture());
-    float x = WINDOW_WIDTH / 2 + WINDOW_WIDTH / 64;
-    float y = WINDOW_HEIGHT / 8 + WINDOW_HEIGHT / 64;
-    sprite.setTextureRect(sf::IntRect(0, 0, WINDOW_WIDTH / 2 - WINDOW_WIDTH / 32, WINDOW_HEIGHT / 10));
-    sprite.setPosition(x, y);
-
-    windowPtr_->draw(sprite);
-    showText("DIG SPEED ++", BUTTON_FONT_SIZE, sf::Color::Black, 0, x + WINDOW_WIDTH / 64, y + WINDOW_HEIGHT / 64);
-    buyDigSpeedButton_ = sprite;
-}
-
-bool GUI::checkIfClicked(sf::Sprite sprite)
-{
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    if (clock.getElapsedTime().asMilliseconds() >= GUI_BREAK_TIME)
     {
-        // transform the mouse position from window coordinates to world coordinates
-        sf::Vector2f mouse = windowPtr_->mapPixelToCoords(sf::Mouse::getPosition(*windowPtr_));
-
-        // retrieve the bounding box of the sprite
-        sf::FloatRect bounds = sprite.getGlobalBounds();
-        sf::FloatRect scaledBounds = sf::FloatRect(
-            bounds.left, bounds.top,
-            bounds.width * sprite.getScale().x,
-            bounds.height * sprite.getScale().y);
-
-        // hit test
-        if (bounds.contains(mouse))
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            // mouse is on sprite!
-            return true;
+            auto mousePos = sf::Mouse::getPosition(*windowPtr_); // Mouse position relative to the window
+            auto translatedPos = windowPtr_->mapPixelToCoords(mousePos); // Mouse position translated into world coordinates
+            return sprite.getGlobalBounds().contains(translatedPos); // Rectangle-contains-point check
         }
     }
     return false;
@@ -89,12 +67,13 @@ void GUI::showText(std::string toShow, unsigned int fontSize, sf::Color color, s
     windowPtr_->draw(text);
 }
 
-ResourceHoarder& GUI::rh()
+void GUI::showButton(std::string label, float x, float y, float xLabelOff, float yLabelOff, float width, float height, sf::Sprite& spriteHolder)
 {
-    return rh_;
-}
-
-sf::Sprite& GUI::buyDigSpeedButton()
-{
-    return buyDigSpeedButton_;
+    sf::Sprite sprite;
+    sprite.setTexture(rh_.buttonBackgroundTexture());
+    sprite.setTextureRect(sf::IntRect(0, 0, width, height));
+    sprite.setPosition(x, y);
+    windowPtr_->draw(sprite);
+    showText(label, BUTTON_FONT_SIZE, sf::Color::Black, 0, x + xLabelOff, y + xLabelOff);
+    spriteHolder = sprite;
 }

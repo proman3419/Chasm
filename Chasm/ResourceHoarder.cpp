@@ -53,34 +53,3 @@ ResourceHoarder::ResourceHoarder()
 
 	mainFont_.loadFromFile("fonts/bescii.ttf");
 }
-
-sf::Texture& ResourceHoarder::buttonBackgroundTexture()
-{
-	return buttonBackgroundTexture_;
-}
-
-sf::Sprite& ResourceHoarder::minerSprite()
-{
-	return minerSprite_;
-}
-
-sf::Sprite& ResourceHoarder::minerSprite(size_t id)
-{
-	minerSprite_ = minerSprites_[id];
-	return minerSprite_;
-}
-
-sf::Sprite& ResourceHoarder::minerBackgroundSprite(size_t id)
-{
-	return minerBackgroundSprites_[id];
-}
-
-sf::Sprite& ResourceHoarder::shopBackgroundSprite()
-{
-	return shopBackgroundSprite_;
-}
-
-sf::Font& ResourceHoarder::mainFont()
-{
-	return mainFont_;
-}
