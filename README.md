@@ -8,4 +8,4 @@ There are 3 improvements to spend it on:
 - dynamite power - defines how much depth player gains if they buy a dynamite (no rock is earned)
 
 ## Demo
-![Demo](https://github.com/proman3419/Chasm/demo.JPG)
+![Demo](https://github.com/proman3419/Chasm/blob/master/demo.JPG)
